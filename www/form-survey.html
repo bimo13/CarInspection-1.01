@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Car Inspection</title>
+        
+        <!-- Bootstrap core CSS -->
+    	<link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Custom styles for main-page.html -->
+    	<link href="includes/css/main.css" rel="stylesheet">
+        <link href="includes/css/form-page.css" rel="stylesheet">
+        <link href="includes/css/dialogs.css" rel="stylesheet">
+        
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+    </head>
+    
+    <body>
+    	
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Total IT - Car Inspection</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container">
+        	
+            <p class="messages bg-primary">SURVEY BARU</p>
+            
+            <form role="form" id="form-survey" autocomplete="off">
+            
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Data Pribadi</h4>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cust_nama" name="cust_nama" placeholder="Nama Pelanggan" required />
+                        </div>
+                        
+                        <div class="form-group">
+                        	<textarea class="form-control" id="cust_addr" name="cust_addr" placeholder="Alamat Saat Ini" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cust_kota" name="cust_kota" placeholder="Kota" required />
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cust_zipc" name="cust_zipc" placeholder="Kode Pos" required />
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cust_telp" name="cust_telp" placeholder="Telepon" required />
+                            <p class="help-block">Contoh : 62218300111</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cust_cell" name="cust_cell" placeholder="Handphone" required />
+                            <p class="help-block">Contoh : 628110002000</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="cust_mail" name="cust_mail" placeholder="Email" required />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="cust_incm">Pendapatan per Tahun</label>
+                            <select class="form-control" id="cust_incm" name="cust_incm" required>
+                                <option value="-">- Pilih Satu -</option>
+                                <option value="1">< 100 Juta</option>
+                                <option value="2">100 Juta s/d 500 Juta</option>
+                                <option value="3">500 Juta s/d 1 Milyar</option>
+                                <option value="4">> 1 Milyar</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="cust_fsrc">Sumber Pendanaan Transaksi</label>
+                            <select class="form-control" id="cust_fsrc" name="cust_fsrc" required>
+                                <option value="-">- Pilih Satu -</option>
+                                <option value="Penghasilan">Penghasilan</option>
+                                <option value="Tabungan">Tabungan</option>
+                                <option value="Pinjaman">Pinjaman</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Data Kendaraan</h4>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="kend_merk">Merk Kendaraan</label>
+                            <select class="form-control" id="kend_merk" name="kend_merk" onChange="getDataSeries(this.value)" required>
+                                <option value="-">- Pilih Satu -</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="kend_seri">Model dan Seri Kendaraan</label>
+                            <select class="form-control" id="kend_seri" name="kend_seri" onChange="getDataYear($(this).find('option:selected').text())" required>
+                                <option value="-">- Pilih Satu -</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="kend_gear">Transmisi</label>
+                            <select class="form-control" id="kend_gear" name="kend_gear" required>
+                                <option value="-">- Pilih Satu -</option>
+                                <option value="MT">Manual</option>
+                                <option value="AT">Otomatis</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="kend_year">Tahun Pembuatan</label>
+                            <select class="form-control" id="kend_year" name="kend_year" onChange="getDataPrice(this.value)" required>
+                                <option value="-">- Pilih Satu -</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="kend_npol" name="kend_npol" placeholder="Nomor Polisi" required />
+                            <p class="help-block">Contoh : B 1234 CDE</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="kend_nrgk" name="kend_nrgk" placeholder="Nomor Rangka" required />
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="kend_nmes" name="kend_nmes" placeholder="Nomor Mesin" required />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="kend_guna">Penggunaan Kendaraan</label>
+                            <select class="form-control" id="kend_guna" name="kend_guna" required>
+                                <option value="-">- Pilih Satu -</option>
+                                <option value="Pribadi">Pribadi</option>
+                                <option value="Dinas">Dinas</option>
+                                <option value="Komersil">Komersil</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Rp.</span>
+                                <input type="text" class="form-control" id="kend_rfnd" name="kend_rfnd" placeholder="Harga Pertanggungan" readonly required />
+                                <input type="hidden" id="kend_afnd" name="kend_afnd" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Produk Asuransi</h4>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="form-group">
+                            
+                            <div class="checkbox-group">
+                                
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="prod_all" id="prod_all" class="val-checkbox"> Comprehensive Package (All Risk)
+                                    </label>
+                                </div>
+                                
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="prod_tlo" id="prod_tlo" class="val-checkbox"> TLO (Total Lost Only)
+                                    </label>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="form-group">
+                            <p class="help-block"><b style="color: #F00;">Wajib Diisi.</b> Dapat dipilih salah satu atau semua.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Perluasan Jaminan</h4>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="grt_sts" id="grt_sts"> SRCC TS (Huru-Hara, Terorism dan Sabotase)
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="grt_bda" id="grt_bda"> Banjir dan Angin Topan
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="grt_aog" id="grt_aog"> AOG (Bencana Alam, Gempa Bumi, Tsunami, dll)
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="grt_tjh" id="grt_tjh"> TJH / TPL (Tanggung Jawab Hukum pada Pihak Ketiga, max. Rp. 10 Juta,-)
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="grt_psa" id="grt_psa"> PA (Personal Accident, untuk 5 orang, Rp. 10 Juta,-/orang)
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="grt_mdx" id="grt_mdx"> MedEx (Biaya Pengobatan akibat kecelakaan, untuk 5 orang, Rp. 2,5 Juta,-/orang)
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <p class="help-block">Dapat dikosongkan, atau dipilih salah satu atau semua.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-success btn-block bt-icon" id="btn-next-ins">SUBMIT</button>
+                </div>
+            
+            </form>
+            
+        </div>
+        
+        <div class="container">
+            <hr />
+            <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="window.location.href='main-page.html';">Main Page <span class="glyphicon glyphicon-home"></span></button>
+            <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="logout();">Sign Out <span class="glyphicon glyphicon-off"></span></button>
+        </div>
+        
+        <!-- Dialogs -->
+        <div class="modal fade" id="AppDialogs" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myDialogs" aria-hidden="true">
+        	<div class="modal-dialog">
+                <div class="modal-content">
+                	<div class="modal-header">
+                    	<h4 class="modal-title" id="myDialogs"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="alert" id="myDialogsText"></p>
+                    </div>
+                    <div class="modal-footer" id="myDialogsFoot">
+                    	<button type="button" class="btn btn-default" id="button-DialogYes"><span class="glyphicon glyphicon-ok"></span> Yes</button>
+                        <button type="button" class="btn btn-default" id="button-DialogNo"><span class="glyphicon glyphicon-remove"></span> No</button>
+                        <button type="button" class="btn btn-default" id="button-DialogClose"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- "Please Wait" Dialog -->
+        <div class="modal fade" id="pleasewait" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myWaitingModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                    	<h4 class="modal-title" id="myWaitingModal">Please wait...</h4>
+                    	<div class="progress progress-striped active">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="cordova.js" type="text/javascript"></script>
+        
+		<script src="includes/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="includes/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="includes/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        
+        <script src="includes/js/func-closeApp.js"></script>
+        <script src="includes/js/func-logout.js"></script>
+        <script src="includes/js/func-session.js"></script>
+        
+        <script src="includes/js/form-func-val.survey.js"></script>
+        <script src="includes/js/form-func-getDataMerk.js"></script>
+        <script src="includes/js/form-func-getDataSeries.js"></script>
+        <script src="includes/js/form-func-getDataYear.js"></script>
+        <script src="includes/js/form-func-getDataPrice.js"></script>
+        <script src="includes/js/form-func-submit.survey.js"></script>
+        
+    </body>
+    
+</html>

@@ -1,0 +1,29 @@
+.form-group{
+	margin:										0 0 5px			!important;
+}
+
+.control-label{
+	margin:										0				!important;
+	padding:									0				!important;
+}
+
+.help-block{
+	font-size:									12px			!important;
+	text-indent:								5px				!important;
+}
+
+.input-group > input {
+	margin:										0				!important;
+}
+
+textarea {
+   resize:										none;
+}
+
+h4.panel-title {
+	font-size:									12px;
+}
+
+.panel {
+	margin:										0 0 10px		!important;
+}
