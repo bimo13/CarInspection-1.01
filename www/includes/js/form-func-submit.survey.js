@@ -128,10 +128,14 @@ function submitSurveyBaru(){
 				});
 				
 				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-					fileSystem.root.getDirectory("TotalIT.CarSurvey/Survey-"+data['return_data'],{create: true, exclusive: false})
+					fileSystem.root.getDirectory("TotalIT.CarSurvey/Survey.Baru",{create: true, exclusive: false})
 				});
 				
-				window.location.href = "form-surveyPhoto.html";
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+					fileSystem.root.getDirectory("TotalIT.CarSurvey/Survey.Baru/Survey-"+data['return_data'],{create: true, exclusive: false})
+				});
+				
+				window.location.href = "form-surveyPhoto.html?lv=baru&dir=Survey-"+data['return_data'];
 			}
 		},
 		"json"
