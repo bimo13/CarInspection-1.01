@@ -40,10 +40,10 @@
             <div class="row">
             	
                 <div class="col-md-6">
-                	<img src="images/icon-camera.jpg" class="img-thumbnail" onClick="capturePhoto(this)" />
+                	<img src="images/icon-camera.jpg" class="img-thumbnail pic-preview" onClick="capturePhoto(this);" />
                 </div>
                 <div class="col-md-6">
-                	<img src="images/icon-camera.jpg" class="img-thumbnail" onClick="capturePhoto(this)" />
+                	<img src="images/icon-camera.jpg" class="img-thumbnail pic-preview" onClick="capturePhoto(this);" />
                 </div>
                 
             </div>
@@ -115,46 +115,46 @@
         </script>
         
         <script>
-        	
+			
 			function capturePhoto(element){
-				navigator.camera.getPicture(
-					function(imageURI){
-						var imgPreview = element;
-						imgPreview.src = imageURI;
-						movePic(imageURI);
-					},
-					function(message){
-						$("#myDialogs").empty();
-						$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
-						
-						$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
-						$("#myDialogsText").addClass("alert-danger");
-						$("#myDialogsText").html("Proses pengambilan gambar gagal :<br />"+message);
-						
-						$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
-						$("#button-DialogNo").removeClass("hide");
-						$("#button-DialogClose").removeClass("hide");
-						
-						$("#button-DialogYes").unbind();
-						$("#button-DialogNo").unbind();
-						$("#button-DialogClose").unbind();
-						
-						$("#button-DialogClose").bind("click", function(){
-							$("#AppDialogs").modal("hide");
-						});
-						
-						$("#button-DialogYes").addClass("hide");
-						$("#button-DialogNo").addClass("hide");
-						
-						$("#AppDialogs").modal();
-					},
-					{
-						quality: 50,
-						targetWidth: 720,
-						targetHeight: 540,
-						destinationType: Camera.destinationType.FILE_URI
-					}
-				);
+				navigator.camera.getPicture(function(fileSystem) { return onPhotoDataSuccess(fileSystem, element); }, onFail, {
+					quality: 50,
+					targetWidth: 720,
+					targetHeight: 540,
+					correctOrientation: true,
+					destinationType: Camera.DestinationType.FILE_URI
+				});
+			}
+			
+			function onPhotoDataSuccess(imageURI) {
+				element.src = imageURI;
+				movePic(imageURI);
+			}
+			
+			function onFail(message) {
+				$("#myDialogs").empty();
+				$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
+				
+				$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
+				$("#myDialogsText").addClass("alert-danger");
+				$("#myDialogsText").html("Proses pengambilan gambar gagal :<br />"+message);
+				
+				$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
+				$("#button-DialogNo").removeClass("hide");
+				$("#button-DialogClose").removeClass("hide");
+				
+				$("#button-DialogYes").unbind();
+				$("#button-DialogNo").unbind();
+				$("#button-DialogClose").unbind();
+				
+				$("#button-DialogClose").bind("click", function(){
+					$("#AppDialogs").modal("hide");
+				});
+				
+				$("#button-DialogYes").addClass("hide");
+				$("#button-DialogNo").addClass("hide");
+				
+				$("#AppDialogs").modal();
 			}
 			
 			function movePic(file){ 
@@ -162,43 +162,26 @@
 			}
 			
 			function resolveOnSuccess(entry){ 
-				
-				var lv		=	GetURLParameter("lv");
-				if(lv == "baru")
-					mainDir		=	"Survey.Baru";
-				else
-					mainDir		=	"Survey.Terjadwal";
-				
-				var subDir		=	GetURLParameter("dir");
-				
 				var d = new Date();
 				var n = d.getTime();
 				
 				var newFileName = n + ".jpg";
 				
-				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-					fileSystem.root.getDirectory("TotalIT.CarSurvey",{create: true, exclusive: false})
-				});
+				var lv				=	GetURLParameter("lv");
+				var subDir			=	GetURLParameter("dir");
 				
-				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-					fileSystem.root.getDirectory("TotalIT.CarSurvey/"+mainDir,{create: true, exclusive: false})
-				});
+				if(lv == "baru")
+					mainDir			=	"Survey.Baru";
+				else
+					mainDir			=	"Survey.Terjadwal";
 				
-				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-					fileSystem.root.getDirectory(
-						"TotalIT.CarSurvey/"+mainDir+"/"+subDir,
-						{
-							create: true,
-							exclusive: false
-						},
-						function(directory) {
-							entry.moveTo(directory, newFileName,  successMove, resOnError);
-						},
-						resOnError
-					);
-				},
-				resOnError);
+				var myAppFolder 	=	"TotalIT.CarSurvey";
+				var myImgMainDir	=	myAppFolder+"/"+mainDir;
+				var myImgSubDir		=	myImgMainDir+"/"+subDir;
 				
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myAppFolder, {create:true, exclusive: false}, null, resOnError); }, resOnError );
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myImgMainDir, {create:true, exclusive: false}, null, resOnError); }, resOnError );
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myImgSubDir, {create:true, exclusive: false}, function(directory) { entry.moveTo(directory, newFileName,  successMove, resOnError); }, resOnError); }, resOnError);
 			}
 			
 			function successMove(entry) {
@@ -229,28 +212,28 @@
 			
 			function resOnError(error) {
 				$("#myDialogs").empty();
-						$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
-						
-						$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
-						$("#myDialogsText").addClass("alert-danger");
-						$("#myDialogsText").html("Proses pengambilan gambar gagal :<br />"+error.code);
-						
-						$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
-						$("#button-DialogNo").removeClass("hide");
-						$("#button-DialogClose").removeClass("hide");
-						
-						$("#button-DialogYes").unbind();
-						$("#button-DialogNo").unbind();
-						$("#button-DialogClose").unbind();
-						
-						$("#button-DialogClose").bind("click", function(){
-							$("#AppDialogs").modal("hide");
-						});
-						
-						$("#button-DialogYes").addClass("hide");
-						$("#button-DialogNo").addClass("hide");
-						
-						$("#AppDialogs").modal();
+				$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
+				
+				$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
+				$("#myDialogsText").addClass("alert-danger");
+				$("#myDialogsText").html("Proses pengambilan gambar gagal :<br />"+error.code);
+				
+				$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
+				$("#button-DialogNo").removeClass("hide");
+				$("#button-DialogClose").removeClass("hide");
+				
+				$("#button-DialogYes").unbind();
+				$("#button-DialogNo").unbind();
+				$("#button-DialogClose").unbind();
+				
+				$("#button-DialogClose").bind("click", function(){
+					$("#AppDialogs").modal("hide");
+				});
+				
+				$("#button-DialogYes").addClass("hide");
+				$("#button-DialogNo").addClass("hide");
+				
+				$("#AppDialogs").modal();
 			}
 			
         </script>
