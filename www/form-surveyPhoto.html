@@ -155,6 +155,7 @@
 			}
 			
 			function onPhotoDataSuccess(imageURI, element){
+				$("#pleasewait").modal();
 				element.src = imageURI;
 				movePic(imageURI);
 			}
@@ -236,6 +237,7 @@
 				$("#button-DialogYes").addClass("hide");
 				$("#button-DialogNo").addClass("hide");
 				
+				$("#pleasewait").modal("hide");
 				$("#AppDialogs").modal();
 			}
 			
@@ -262,6 +264,7 @@
 				$("#button-DialogYes").addClass("hide");
 				$("#button-DialogNo").addClass("hide");
 				
+				$("#pleasewait").modal("hide");
 				$("#AppDialogs").modal();
 			}
 			
