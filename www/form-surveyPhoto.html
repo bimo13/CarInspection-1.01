@@ -14,6 +14,7 @@
         <!-- Custom styles for main-page.html -->
     	<link href="includes/css/main.css" rel="stylesheet">
         <link href="includes/css/form-page.css" rel="stylesheet">
+        <link href="includes/css/imageForm-page.css" rel="stylesheet">
         <link href="includes/css/dialogs.css" rel="stylesheet">
         
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,7 +37,16 @@
         
         <div class="container">
         	
-            
+            <div class="row">
+            	
+                <div class="col-md-6">
+                	<img src="images/icon-camera.jpg" class="img-thumbnail" />
+                </div>
+                <div class="col-md-6">
+                	<img src="images/icon-camera.jpg" class="img-thumbnail" />
+                </div>
+                
+            </div>
             
         </div>
         
@@ -88,6 +98,162 @@
         <script src="includes/js/func-closeApp.js"></script>
         <script src="includes/js/func-logout.js"></script>
         <script src="includes/js/func-session.js"></script>
+        
+        <script>
+        	
+			function GetURLParameter(sParam){
+				var sPageURL = window.location.search.substring(1);
+				var sURLVariables = sPageURL.split('&');
+				for(var i =0; i < sURLVariables.length; i++){
+					var sParameterName = sURLVariables[i].split('=');
+					if(sParameterName[0] == sParam){
+						return sParameterName[1];
+					}
+				}
+			}
+			
+        </script>
+        
+        <script>
+        	
+			function capturePhoto(element){
+				navigator.camera.getPicture(
+					function(imageURI){
+						var imgPreview = element;
+						imgPreview.src = imageURI;
+						movePic(imageURI);
+					},
+					function(message){
+						$("#myDialogs").empty();
+						$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
+						
+						$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
+						$("#myDialogsText").addClass("alert-danger");
+						$("#myDialogsText").html("Proses pengambilan gambar gagal :<br />"+message);
+						
+						$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
+						$("#button-DialogNo").removeClass("hide");
+						$("#button-DialogClose").removeClass("hide");
+						
+						$("#button-DialogYes").unbind();
+						$("#button-DialogNo").unbind();
+						$("#button-DialogClose").unbind();
+						
+						$("#button-DialogClose").bind("click", function(){
+							$("#AppDialogs").modal("hide");
+						});
+						
+						$("#button-DialogYes").addClass("hide");
+						$("#button-DialogNo").addClass("hide");
+						
+						$("#AppDialogs").modal();
+					},
+					{
+						quality: 50,
+						targetWidth: 720,
+						targetHeight: 540,
+						destinationType: Camera.destinationType.FILE_URI
+					}
+				);
+			}
+			
+			function movePic(file){ 
+				window.resolveLocalFileSystemURI(file, resolveOnSuccess, resOnError); 
+			}
+			
+			function resolveOnSuccess(entry){ 
+				
+				var lv		=	GetURLParameter("lv");
+				if(lv == "baru")
+					mainDir		=	"Survey.Baru";
+				else
+					mainDir		=	"Survey.Terjadwal";
+				
+				var subDir		=	GetURLParameter("dir");
+				
+				var d = new Date();
+				var n = d.getTime();
+				
+				var newFileName = n + ".jpg";
+				
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+					fileSystem.root.getDirectory("TotalIT.CarSurvey",{create: true, exclusive: false})
+				});
+				
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+					fileSystem.root.getDirectory("TotalIT.CarSurvey/"+mainDir,{create: true, exclusive: false})
+				});
+				
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+					fileSystem.root.getDirectory(
+						"TotalIT.CarSurvey/"+mainDir+"/"+subDir,
+						{
+							create: true,
+							exclusive: false
+						},
+						function(directory) {
+							entry.moveTo(directory, newFileName,  successMove, resOnError);
+						},
+						resOnError
+					);
+				},
+				resOnError);
+				
+			}
+			
+			function successMove(entry) {
+				$("#myDialogs").empty();
+				$("#myDialogs").html("<div class=\"text-success\">Alert !</div>");
+				
+				$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
+				$("#myDialogsText").addClass("alert-success");
+				$("#myDialogsText").html("Gambar telah berhasil disimpan.");
+				
+				$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
+				$("#button-DialogNo").removeClass("hide");
+				$("#button-DialogClose").removeClass("hide");
+				
+				$("#button-DialogYes").unbind();
+				$("#button-DialogNo").unbind();
+				$("#button-DialogClose").unbind();
+				
+				$("#button-DialogClose").bind("click", function(){
+					$("#AppDialogs").modal("hide");
+				});
+				
+				$("#button-DialogYes").addClass("hide");
+				$("#button-DialogNo").addClass("hide");
+				
+				$("#AppDialogs").modal();
+			}
+			
+			function resOnError(error) {
+				$("#myDialogs").empty();
+						$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
+						
+						$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
+						$("#myDialogsText").addClass("alert-danger");
+						$("#myDialogsText").html("Proses pengambilan gambar gagal :<br />"+error.code);
+						
+						$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
+						$("#button-DialogNo").removeClass("hide");
+						$("#button-DialogClose").removeClass("hide");
+						
+						$("#button-DialogYes").unbind();
+						$("#button-DialogNo").unbind();
+						$("#button-DialogClose").unbind();
+						
+						$("#button-DialogClose").bind("click", function(){
+							$("#AppDialogs").modal("hide");
+						});
+						
+						$("#button-DialogYes").addClass("hide");
+						$("#button-DialogNo").addClass("hide");
+						
+						$("#AppDialogs").modal();
+			}
+			
+        </script>
         
     </body>
     
