@@ -209,6 +209,7 @@
 				
 				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myAppFolder, {create:true, exclusive: false}, null, resOnError); }, resOnError );
 				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myImgMainDir, {create:true, exclusive: false}, null, resOnError); }, resOnError );
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myImgSubDir, {create:true, exclusive: false}, null, resOnError); }, resOnError );
 				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myImgSubDir, {create:true, exclusive: false}, function(directory) { entry.moveTo(directory, newFileName,  successMove, resOnError); }, resOnError); }, resOnError);
 			}
 			
