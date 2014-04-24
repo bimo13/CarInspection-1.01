@@ -118,10 +118,10 @@
 			
 			function capturePhoto(element){
 				navigator.camera.getPicture(function(fileSystem) { return onPhotoDataSuccess(fileSystem, element); }, onFail, {
-					quality: 50,
+					quality: 100,
 					targetWidth: 2048,
 					targetHeight: 1152,
-					correctOrientation: true,
+					//correctOrientation: true,
 					destinationType: Camera.DestinationType.FILE_URI
 				});
 			}
