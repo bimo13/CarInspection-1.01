@@ -5,7 +5,7 @@ function getDataYear(seridesc){
 		$("#pleasewait").modal();
 		
 		$.post(
-			"http://carsurvey.totalit.co.id/web-service/get-dataYear.php",
+			"http://carsurvey.totalit.co.id/bimo/web-service/get-dataYear.php",
 			{ seridesc: seridesc },
 			function(data){
 				if(data['status'] == 1){

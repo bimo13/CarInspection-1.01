@@ -1,7 +1,7 @@
 function getDataMerk(){
 	$("#pleasewait").modal();
 	$.post(
-		"http://carsurvey.totalit.co.id/web-service/get-dataMerk.php",
+		"http://carsurvey.totalit.co.id/bimo/web-service/get-dataMerk.php",
 		function(data){
 			if(data['status'] == 1){
 				$("#pleasewait").modal("hide");

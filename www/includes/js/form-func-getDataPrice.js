@@ -7,7 +7,7 @@ function getDataPrice(seriyear){
 		$("#pleasewait").modal();
 		
 		$.post(
-			"http://carsurvey.totalit.co.id/web-service/get-dataPrice.php",
+			"http://carsurvey.totalit.co.id/bimo/web-service/get-dataPrice.php",
 			{
 				seridesc: seridesc,
 				seriyear: seriyear

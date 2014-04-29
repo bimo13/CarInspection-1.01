@@ -4,7 +4,7 @@ function getDataSeries(idmerk){
 		
 		$("#pleasewait").modal();
 		$.post(
-			"http://carsurvey.totalit.co.id/web-service/get-dataSeries.php",
+			"http://carsurvey.totalit.co.id/bimo/web-service/get-dataSeries.php",
 			{ idmerk: idmerk },
 			function(data){
 				if(data['status'] == 1){

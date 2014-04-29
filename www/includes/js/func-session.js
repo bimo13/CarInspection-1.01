@@ -5,7 +5,7 @@ function session_check(){
 	$.post(
 		// URL
 		//
-		"http://carsurvey.totalit.co.id/web-service/main-session.php",
+		"http://carsurvey.totalit.co.id/bimo/web-service/main-session.php",
 		// When Succeeded
 		//
 		function(data){

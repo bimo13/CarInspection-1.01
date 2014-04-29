@@ -41,7 +41,7 @@ function confirmLogout(){
 	$.post(
 		// URL
 		//
-		"http://carsurvey.totalit.co.id/web-service/main-logout.php",
+		"http://carsurvey.totalit.co.id/bimo/web-service/main-logout.php",
 		// When Succeeded
 		//
 		function(data){

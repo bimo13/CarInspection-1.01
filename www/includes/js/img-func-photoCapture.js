@@ -60,7 +60,7 @@ function resolveOnSuccess(entry){
 	
 	var myAppFolder 	=	"TotalIT.CarSurvey";
 	var myImgMainDir	=	myAppFolder+"/"+mainDir;
-	var myImgSubDir		=	myImgMainDir+"/"+subDir;
+	var myImgSubDir		=	myImgMainDir+"/Survey-"+subDir;
 	
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myAppFolder, {create:true, exclusive: false}, null, resOnError); }, resOnError );
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myImgMainDir, {create:true, exclusive: false}, null, resOnError); }, resOnError );

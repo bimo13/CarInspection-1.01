@@ -7,7 +7,7 @@ if(typeof(lv) != "undefined" && lv !== null){
 	var id				=	GetURLParameter("id");
 	
 	$.post(
-		"http://carsurvey.totalit.co.id/web-service/get-surveyDetail.php",
+		"http://carsurvey.totalit.co.id/bimo/web-service/get-surveyDetail.php",
 		{ id: id },
 		function(data){
 			if(data['status'] != 1){

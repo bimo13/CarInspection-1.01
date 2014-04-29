@@ -5,7 +5,7 @@ function submitSurveyBaru(){
 	if(typeof(lv) != "undefined" && lv !== null){
 		
 		var survey_id			=	GetURLParameter("id");
-		window.location.href	=	"form-surveyPhoto.html?lv=terjadwal&dir=Survey-"+survey_id;
+		window.location.href	=	"form-surveyPhoto.html?lv=terjadwal&dir="+survey_id;
 		
 	}else{
 		
@@ -76,7 +76,7 @@ function submitSurveyBaru(){
 			var grt_mdx		=	"n";
 		
 		$.post(
-			"http://carsurvey.totalit.co.id/web-service/submit-surveyBaru.php",
+			"http://carsurvey.totalit.co.id/bimo/web-service/submit-surveyBaru.php",
 			{
 				cust_nama: cust_nama,
 				cust_addr: cust_addr,
@@ -144,7 +144,7 @@ function submitSurveyBaru(){
 						fileSystem.root.getDirectory("TotalIT.CarSurvey/Survey.Baru/Survey-"+data['return_data'],{create: true, exclusive: false})
 					});
 					
-					window.location.href = "form-surveyPhoto.html?lv=baru&dir=Survey-"+data['return_data'];
+					window.location.href = "form-surveyPhoto.html?lv=baru&dir="+data['return_data'];
 				}
 			},
 			"json"
