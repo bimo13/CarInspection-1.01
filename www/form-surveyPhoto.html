@@ -14,7 +14,6 @@
         <!-- Custom styles for main-page.html -->
     	<link href="includes/css/main.css" rel="stylesheet">
         <link href="includes/css/form-page.css" rel="stylesheet">
-        <link href="includes/css/imageForm-page.css" rel="stylesheet">
         <link href="includes/css/dialogs.css" rel="stylesheet">
         
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -139,42 +138,45 @@
 					window.location.href = "main-page.html";
 				});
 			}else{
-				var id			=	GetURLParameter("dir");
-				$.post(
-					"http://carsurvey.totalit.co.id/bimo/web-service/submit-imageForm.php",
-					{ id: id },
-					function(data){
-						if(data['status'] != 1){
-							$("#myDialogs").empty();
-							$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
-							
-							$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
-							$("#myDialogsText").addClass("alert-danger");
-							$("#myDialogsText").html(data['message']);
-							
-							$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
-							$("#button-DialogNo").removeClass("hide");
-							$("#button-DialogClose").removeClass("hide");
-							
-							$("#button-DialogYes").unbind();
-							$("#button-DialogNo").unbind();
-							$("#button-DialogClose").unbind();
-							
-							$("#button-DialogClose").bind("click", function(){
-								$("#AppDialogs").modal("hide");
-							});
-							
-							$("#button-DialogYes").addClass("hide");
-							$("#button-DialogNo").addClass("hide");
-							
-							$("#pleasewait").modal("hide");
-							$("#AppDialogs").modal();
-						}else{
-							window.location.href = "main-page.html";
-						}
-					},
-					"json"
-				);
+				$("#btn-finish").click(function(){
+					$("#pleasewait").modal();
+					var id			=	GetURLParameter("dir");
+					$.post(
+						"http://carsurvey.totalit.co.id/bimo/web-service/submit-imageForm.php",
+						{ id: id },
+						function(data){
+							if(data['status'] != 1){
+								$("#myDialogs").empty();
+								$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
+								
+								$("#myDialogsText").removeClass("alert-success alert-info alert-warning alert-danger");
+								$("#myDialogsText").addClass("alert-danger");
+								$("#myDialogsText").html(data['message']);
+								
+								$("#button-DialogYes").removeClass("btn-info btn-danger btn-warning btn-primary hide");
+								$("#button-DialogNo").removeClass("hide");
+								$("#button-DialogClose").removeClass("hide");
+								
+								$("#button-DialogYes").unbind();
+								$("#button-DialogNo").unbind();
+								$("#button-DialogClose").unbind();
+								
+								$("#button-DialogClose").bind("click", function(){
+									$("#AppDialogs").modal("hide");
+								});
+								
+								$("#button-DialogYes").addClass("hide");
+								$("#button-DialogNo").addClass("hide");
+								
+								$("#pleasewait").modal("hide");
+								$("#AppDialogs").modal();
+							}else{
+								window.location.href = "main-page.html";
+							}
+						},
+						"json"
+					);
+				});
 			}
         </script>
         
