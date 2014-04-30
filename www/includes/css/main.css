@@ -1,7 +1,22 @@
 body {
-	padding-top					: 60px;
+	/*
+	padding-top					: 128px;
+	*/
 	padding-bottom				: 60px;
-	background-color			: #eee;
+	background-color			: #FFF;
+}
+
+.nav-out{
+	font-size: 32px;
+}
+
+.box-link{
+	margin-bottom: 30px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.box-link img{
+	margin-bottom: 15px;
 }
 
 p.messages {
@@ -25,4 +40,14 @@ hr {
   border-style: solid none;
   border-width: 1px 0;
   margin: 18px 0;
+}
+
+.main-link{
+	padding: 15px;
+	font-size: 1.2em;
+}
+
+.main-link > span.glyphicon{
+	font-size: 6em;
+	color: #22C20A;
 }

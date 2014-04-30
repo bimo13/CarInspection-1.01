@@ -9,7 +9,7 @@
         <title>Car Inspection</title>
         
         <!-- Bootstrap core CSS -->
-    	<link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="includes/bootstrap/css/bootstrap.css" rel="stylesheet">
         
         <!-- Custom styles for main-page.html -->
     	<link href="includes/css/main.css" rel="stylesheet">
@@ -26,17 +26,27 @@
     
     <body>
     	
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Total IT - Car Inspection</a>
+            	<button type="button" class="navbar-toggle" data-target=".navbar-collapse" style="border: none !important;" onMouseOver="this.style.background = 'none'">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-out"><a href="javascript:void(0);" onClick="logout();"><span class="glyphicon glyphicon-off"></span></a></li>
+                    </ul>
+                </button>
+              <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="images/icon-logo.png" height="48px" /> CarSurvey</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-out"><a href="javascript:void(0);" onClick="logout();"><span class="glyphicon glyphicon-off"></span></a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
         
         <div class="container">
         	
-            <p class="messages bg-primary">FORM SURVEY</p>
+            <p class="messages" style="background-color: #BF0029; color: #FFF;">FORM SURVEY</p>
             
             <form role="form" id="form-survey" autocomplete="off">
             
@@ -55,7 +65,17 @@
                         </div>
                         
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cust_kota" name="cust_kota" placeholder="Kota" required />
+                            <label class="control-label" for="cust_incm">Provinsi</label>
+                            <select class="form-control" id="cust_prov" name="cust_prov" onChange="getDataKota(this.value)" required>
+                                <option value="-">- Pilih Satu -</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                        	<label class="control-label" for="cust_incm">Kota/Kabupaten</label>
+                            <select class="form-control" id="cust_kota" name="cust_kota" required>
+                                <option value="-">- Pilih Satu -</option>
+                            </select>
                         </div>
                         
                         <div class="form-group">
@@ -184,13 +204,13 @@
                                 
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="prod_all" id="prod_all" class="val-checkbox"> Comprehensive Package (All Risk)
+                                        <input type="radio" name="insc_prod" value="all" id="prod_all" class="val-checkbox"> Comprehensive Package (All Risk)
                                     </label>
                                 </div>
                                 
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="prod_tlo" id="prod_tlo" class="val-checkbox"> TLO (Total Lost Only)
+                                        <input type="radio" name="insc_prod" value="tlo" id="prod_tlo" class="val-checkbox"> TLO (Total Lost Only)
                                     </label>
                                 </div>
                                 
@@ -255,7 +275,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-lg btn-success btn-block bt-icon" id="btn-next-ins">LANJUT</button>
+                    <button type="submit" class="btn btn-lg btn-warning bt-icon" id="btn-next-ins">LANJUT</button>
                 </div>
             
             </form>
@@ -313,6 +333,10 @@
         <script src="includes/js/func-session.js"></script>
         
         <script src="includes/js/form-func-val.survey.js"></script>
+        
+        <script src="includes/js/form-func-getDataProv.js"></script>
+        <script src="includes/js/form-func-getDataKota.js"></script>
+        
         <script src="includes/js/form-func-getDataMerk.js"></script>
         <script src="includes/js/form-func-getDataSeries.js"></script>
         <script src="includes/js/form-func-getDataYear.js"></script>

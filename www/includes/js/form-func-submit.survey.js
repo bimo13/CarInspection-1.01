@@ -33,16 +33,13 @@ function submitSurveyBaru(){
 		var kend_guna		=	$("#kend_guna").val();
 		var kend_rfnd		=	$("#kend_afnd").val();
 		
-		//Data Produk
-		if($("#prod_all").is(':checked'))
+		if($("#insc_prod").val() == "all"){
 			var prod_all	=	"y";
-		else
-			var prod_all	=	"n";
-		
-		if($("#prod_tlo").is(':checked'))
-			var prod_tlo	=	"y";
-		else
 			var prod_tlo	=	"n";
+		}else{
+			var prod_all	=	"n";
+			var prod_tlo	=	"y";
+		}
 		
 		//Data Jaminan
 		if($("#grt_sts").is(':checked'))

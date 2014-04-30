@@ -9,7 +9,7 @@
         <title>Car Inspection</title>
         
         <!-- Bootstrap core CSS -->
-    	<link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="includes/bootstrap/css/bootstrap.css" rel="stylesheet">
         
         <!-- Custom styles for main-page.html -->
     	<link href="includes/css/main.css" rel="stylesheet">
@@ -26,10 +26,20 @@
     
     <body>
     	
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
+            	<button type="button" class="navbar-toggle" data-target=".navbar-collapse" style="border: none !important;" onMouseOver="this.style.background = 'none'">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-out"><a href="javascript:void(0);" onClick="logout();"><span class="glyphicon glyphicon-off"></span></a></li>
+                    </ul>
+                </button>
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Total IT - Car Inspection</a>
+                    <a class="navbar-brand" href="#"><img src="images/icon-logo.png" height="48px" /> CarSurvey</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-out"><a href="javascript:void(0);" onClick="logout();"><span class="glyphicon glyphicon-off"></span></a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -75,7 +85,7 @@
                 
             </div>
             
-            <button type="button" class="btn btn-success btn-lg btn-block bt-icon" id="btn-finish">Selesai <span class="glyphicon glyphicon-ok"></span></button>
+            <button type="button" class="btn btn-warning btn-lg bt-icon" id="btn-finish">SELESAI</button>
             
         </div>
         

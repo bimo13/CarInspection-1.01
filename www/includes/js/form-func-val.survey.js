@@ -1,5 +1,7 @@
 $('#form-survey').validate({
 	rules: {
+		cust_prov: { selectcheck: true },
+		cust_kota: { selectcheck: true },
 		cust_incm: { selectcheck: true },
 		cust_fsrc: { selectcheck: true },
 		kend_merk: { selectcheck: true },

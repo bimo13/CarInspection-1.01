@@ -9,7 +9,7 @@
         <title>Car Inspection</title>
         
         <!-- Bootstrap core CSS -->
-    	<link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="includes/bootstrap/css/bootstrap.css" rel="stylesheet">
         
         <!-- Custom styles for main-page.html -->
     	<link href="includes/css/main.css" rel="stylesheet">
@@ -26,27 +26,58 @@
     
     <body>
     	
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Total IT - Car Inspection</a>
+            	<button type="button" class="navbar-toggle" data-target=".navbar-collapse" style="border: none !important;" onMouseOver="this.style.background = 'none'">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-out"><a href="javascript:void(0);" onClick="logout();"><span class="glyphicon glyphicon-off"></span></a></li>
+                    </ul>
+                </button>
+              <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="images/icon-logo.png" height="48px" /> CarSurvey</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-out"><a href="javascript:void(0);" onClick="logout();"><span class="glyphicon glyphicon-off"></span></a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
         
         <div class="container">
-        	<div class="link-button">
+        	
+            <div class="row">
+            	
+                <div class="col-xs-12 text-center box-link">
+                	<span onClick="window.location.href='list-jadwal.html';">
+                        <img src="images/icon-calendar.png" height="192" />
+                        <br />
+                        JADWAL SURVEY
+                    </span>
+                </div>
+                
+                <div class="col-xs-12 text-center box-link">
+                	<span onClick="window.location.href='form-survey.html';">
+                        <img src="images/icon-search.png" height="192" />
+                        <br />
+                        SURVEY BARU
+                    </span>
+                </div>
+                
+            </div>
+            
+            <!--
+            <div class="link-button">
+                
                 <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="window.location.href='list-jadwal.html';">List Jadwal <span class="glyphicon glyphicon-list-alt"></span></button>
                 <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="window.location.href='form-survey.html';">Form Survey <span class="glyphicon glyphicon-list-alt"></span></button>
-                <!--
+                <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="logout();">Sign Out <span class="glyphicon glyphicon-off"></span></button>
                 <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="window.location.href='form-surveyPhoto.html?lv=baru&dir=Survey-1';">Form Gambar [dev] <span class="glyphicon glyphicon-camera"></span></button>
                 <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="window.location.href='form-survey.html?lv=jadwal&id=1';">Survey Terjadwal [dev] <span class="glyphicon glyphicon-list-alt"></span></button>
-                -->
-                <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="logout();">Sign Out <span class="glyphicon glyphicon-off"></span></button>
+                
             </div>
-            <p class="messages err_body_bg">
-                <span class="text-messages err_body_text"></span>
-            </p>
+            -->
+            
         </div>
         
         <!-- Dialogs -->

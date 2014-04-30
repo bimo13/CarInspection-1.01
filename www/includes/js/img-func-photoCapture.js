@@ -68,6 +68,7 @@ function resolveOnSuccess(entry){
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) { fileSys.root.getDirectory( myImgSubDir, {create:true, exclusive: false}, function(directory) { entry.moveTo(directory, newFileName,  successMove, resOnError); }, resOnError); }, resOnError);
 }
 
+/*
 function successMove(entry) {
 	$("#myDialogs").empty();
 	$("#myDialogs").html("<div class=\"text-success\">Alert !</div>");
@@ -93,6 +94,11 @@ function successMove(entry) {
 	
 	$("#pleasewait").modal("hide");
 	$("#AppDialogs").modal();
+}
+*/
+
+function successMove(entry) {
+	$("#pleasewait").modal("hide");
 }
 
 function resOnError(error) {

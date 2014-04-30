@@ -2,12 +2,12 @@
 <widget xmlns     		= "http://www.w3.org/ns/widgets"
         xmlns:gap 		= "http://phonegap.com/ns/1.0"
     	xmlns:android   = "http://schemas.android.com/apk/res/android"
-        id        		= "com.TotalIT.CarInspection"
+        id        		= "com.TotalIT.CarSurvey"
         version   		= "1.0.1">
 
-			<name>TotalIT Car Inspection</name>
+			<name>CarSurvey</name>
 			<description>
-				Android Application for Car Inspection
+				Android Application for Insurance Car Survey
 			</description>
 			
 			<author href="http://totalit.co.id/" email="support@totalit.co.id">
