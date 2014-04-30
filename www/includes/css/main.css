@@ -11,12 +11,12 @@ body {
 }
 
 .box-link{
-	margin-bottom: 30px;
+	margin: 10px 0 20px;
 	font-size: 18px;
 	font-weight: bold;
 }
 .box-link img{
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 p.messages {
@@ -50,4 +50,10 @@ hr {
 .main-link > span.glyphicon{
 	font-size: 6em;
 	color: #22C20A;
+}
+
+.btn-menu{
+	background-color: #BF0029;
+	border-color: #BF0029;
+	color: #FFF;
 }

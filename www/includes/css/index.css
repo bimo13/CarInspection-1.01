@@ -1,6 +1,6 @@
 body {
-	padding-top					: 40px;
-	padding-bottom				: 40px;
+	padding-top					: 20px;
+	padding-bottom				: 20px;
 	background-color			: #BF0029;
 }
 
@@ -44,4 +44,15 @@ body {
 p.messages {
 	margin						: 10px 0 0;
 	padding						: 15px;
+}
+
+.app-title{
+	width: auto;
+	text-align: center;
+	margin-top: -20px;
+	margin-bottom: 20px;
+	
+	color: #FFF;
+	font-weight: bold;
+	font-size: 48px;
 }
